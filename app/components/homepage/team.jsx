@@ -38,11 +38,9 @@ function TeamSection() {
                 <Image
                   src={member.image}
                   alt={member.name}
-                  width={400}
-                  height={500}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-4 left-4 right-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex gap-2 justify-center">

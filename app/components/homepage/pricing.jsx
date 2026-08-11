@@ -1,6 +1,7 @@
 // @flow strict
 import { pricingData } from "@/utils/data/pricing";
-import { FaCheck, FaXmark, FaStar, FaTag } from "react-icons/fa";
+import { FaCheck, FaStar, FaTag } from "react-icons/fa";
+import { FaXmark } from "react-icons/fa6";
 
 function PricingSection() {
   const { packages, addOns, promo, currency, period } = pricingData;

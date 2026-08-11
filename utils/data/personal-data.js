@@ -12,6 +12,8 @@ export const personalData = {
   twitter: 'https://twitter.com/ibnuwm',
   instagram: 'https://instagram.com/ibnuwm',
   youtube: 'https://youtube.com/@ibnuwm',
+  facebook: 'https://facebook.com/ibnuwm',
+  stackOverflow: 'https://stackoverflow.com/users/ibnuwm',
   resume: 'https://drive.google.com/file/d/RESUME_ID/view',
   devUsername: 'ibnuwm',
   officeAddress: 'Jl. Raya Kemang No. 123, Kemang, Jakarta Selatan 12730',

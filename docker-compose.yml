@@ -1,29 +1,43 @@
+# ============================================================
+# Ibnu WM Portfolio — docker compose (production)
+#
+# Setup Nginx Proxy Manager:
+#   1. Pastikan NPM dan service ini ada di Docker network yang SAMA.
+#      Cek nama network NPM:  docker network ls
+#      Lalu sesuaikan `name:` di bagian networks bawah.
+#   2. docker compose up -d --build
+#   3. Di NPM (http://npm:81):
+#      Hosts -> Proxy Hosts -> Add Proxy Host
+#        Domain Names : portfolio.ibnuwm.com
+#        Forward Host : portfolio      (nama service/container)
+#        Forward Port : 3000
+#      Centang: Block Common Exploits, Websockets Support
+#
+# Opsional: kalau mau akses langsung tanpa NPM, hapus komentar `ports`.
+# ============================================================
+
 services:
-  dev:
+  portfolio:
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    container_name: demo-nextjs-dev
+      dockerfile: Dockerfile
+    container_name: portfolio
+    restart: unless-stopped
+    # env untuk contact form API (Gmail + Telegram). File .env opsional:
+    # kalau tidak ada, API kontak balas error 400 dengan pesan jelas.
+    env_file:
+      - path: .env
+        required: false
     environment:
-      - WATCHPACK_POLLING=true
-    volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
-    ports:
-      - "3000:3000"
-    env_file:
-      - .env
+      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+    # langsung dari NPM via network bersama (tidak perlu publish port)
+    expose:
+      - "3000"
+    # akses langsung (tanpa NPM): buka http://host:3100
+    # ports:
+    #   - "3100:3000"
 
-  prod:
-    build:
-      context: .
-      dockerfile: Dockerfile.prod
-    container_name: demo-nextjs
-    ports:
-      - "3005:3000"
-    env_file:
-      - .env
-
-volumes:
-  node_modules:
+networks:
+  default:
+    name: npm_default
+    external: true

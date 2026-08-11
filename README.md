@@ -194,11 +194,35 @@ Response: Email via Gmail SMTP + Telegram Bot notification
 
 ## 🐳 Docker Deployment
 
-```dockerfile
-# Dockerfile.prod included
-docker build -f Dockerfile.prod -t portfolio .
-docker run -p 3000:3000 --env-file .env.production portfolio
+Image production multi-stage (Next.js standalone — runtime minim, non-root user, healthcheck).
+
+```bash
+# 1. Build & jalankan (join network NPM: npm_default)
+docker compose up -d --build
+
+# 2. Cek status
+docker compose ps
+
+# 3. Logs
+docker compose logs -f portfolio
 ```
+
+**Setup Nginx Proxy Manager:**
+1. Pastikan network sama: `docker network ls` → sesuaikan `name: npm_default` di `docker-compose.yml` dengan network NPM kamu.
+2. NPM Admin (`http://npm:81`) → **Hosts → Proxy Hosts → Add Proxy Host**:
+   - Domain Names: `portfolio.ibnuwm.com`
+   - Forward Hostname: `portfolio` (nama service)
+   - Forward Port: `3000`
+   - Centang **Block Common Exploits** + **Websockets Support**
+3. Save → situs live.
+
+**Build manual:**
+```bash
+docker build -t ibnuwm-portfolio .
+docker run -d --name portfolio -p 3100:3000 --restart unless-stopped ibnuwm-portfolio
+```
+
+**Env vars** (opsional, untuk contact form): salin `.env.example` → `.env`, isi `EMAIL_ADDRESS`, `GMAIL_PASSKEY`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`. Tanpa `.env` situs tetap jalan, API kontak hanya balas error 400.
 
 ## 📄 License
 

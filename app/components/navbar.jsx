@@ -1,4 +1,5 @@
 // @flow strict
+"use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { FaBars, FaXmark, FaWhatsapp } from "react-icons/fa6";

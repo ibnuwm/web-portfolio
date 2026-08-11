@@ -172,11 +172,9 @@ function TestimonialCard({ testimonial, onVideoClick }) {
           <Image
             src={testimonial.image}
             alt={testimonial.name}
-            width={48}
-            height={48}
-            className="w-full h-full object-cover"
             fill
             sizes="48px"
+            className="object-cover"
           />
         </div>
         <div>

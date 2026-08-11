@@ -86,11 +86,8 @@ function AboutSection() {
             <div className="absolute inset-0 bg-gradient-to-br from-violet-500/30 to-pink-500/30 rounded-full blur-2xl animate-pulse-slow" />
             <Image
               src={personalData.profile}
-              width={320}
-              height={320}
               alt={personalData.name}
-              className="relative rounded-2xl transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-105 cursor-pointer border-4 border-violet-500/30"
-              style={{ width: 'auto', height: 'auto' }}
+              className="relative rounded-2xl transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-105 cursor-pointer border-4 border-violet-500/30 object-cover"
               fill
               sizes="(max-width: 640px) 280px, 320px"
               priority

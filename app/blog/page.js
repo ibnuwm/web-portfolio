@@ -1,7 +1,7 @@
 // @flow strict
 
 import { personalData } from "@/utils/data/personal-data";
-import BlogCard from "@/components/homepage/blog/blog-card";
+import BlogCard from "../components/homepage/blog/blog-card";
 import { FaArrowLeft, FaTag, FaCalendar, FaClock, FaEye } from "react-icons/fa";
 import Link from "next/link";
 

@@ -21,15 +21,31 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        # NEXT_PUBLIC_* harus di-inline saat build (ARG di Dockerfile)
+        - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+        - NEXT_PUBLIC_GTM=${NEXT_PUBLIC_GTM:-}
+        - NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${NEXT_PUBLIC_RECAPTCHA_SITE_KEY:-}
+        - NEXT_PUBLIC_EMAIL=${NEXT_PUBLIC_EMAIL:-}
+        - NEXT_PUBLIC_PHONE=${NEXT_PUBLIC_PHONE:-}
+        - NEXT_PUBLIC_WHATSAPP=${NEXT_PUBLIC_WHATSAPP:-}
+        - NEXT_PUBLIC_RESUME_URL=${NEXT_PUBLIC_RESUME_URL:-}
+        - NEXT_PUBLIC_ADDRESS=${NEXT_PUBLIC_ADDRESS:-}
+        - NEXT_PUBLIC_OFFICE_ADDRESS=${NEXT_PUBLIC_OFFICE_ADDRESS:-}
+        - NEXT_PUBLIC_OFFICE_HOURS=${NEXT_PUBLIC_OFFICE_HOURS:-}
     container_name: portfolio
     restart: unless-stopped
-    # env untuk contact form API (Gmail + Telegram). File .env opsional:
-    # kalau tidak ada, API kontak balas error 400 dengan pesan jelas.
+    # env untuk API server-only (Gmail + Telegram + reCAPTCHA secret). File .env opsional:
+    # kalau tidak ada, API kontak balas error jelas.
     env_file:
       - path: .env
         required: false
     environment:
-      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      - EMAIL_ADDRESS=${EMAIL_ADDRESS:-}
+      - GMAIL_PASSKEY=${GMAIL_PASSKEY:-}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
+      - RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY:-}
     # langsung dari NPM via network bersama (tidak perlu publish port)
     expose:
       - "3000"

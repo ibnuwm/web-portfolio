@@ -41,7 +41,7 @@ function PricingSection() {
 
       {/* Promo Banner */}
       {promo.active && (
-        <div className="max-w-7xl mx-auto px-4 mb-12">
+        <div className="container-page mb-12">
           <div className="relative bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 rounded-2xl p-6 lg:p-8 overflow-hidden">
             <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
             <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
@@ -71,7 +71,7 @@ function PricingSection() {
           <span className="text-violet-400 font-medium"> Konsultasi gratis </span> untuk menentukan paket terbaik.
         </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto px-4">
+        <div className="container-page grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {packages.map((pkg) => (
             <div
               key={pkg.id}
@@ -162,7 +162,7 @@ function PricingSection() {
         </div>
 
         {/* Add-ons Section */}
-        <div className="mt-16 max-w-7xl mx-auto px-4">
+        <div className="container-page mt-16">
           <div className="text-center mb-8">
             <h4 className="text-xl lg:text-2xl font-bold text-white mb-2">Tambahan Layanan (Add-ons)</h4>
             <p className="text-gray-400">Dapat ditambahkan ke paket mana pun sesuai kebutuhan</p>

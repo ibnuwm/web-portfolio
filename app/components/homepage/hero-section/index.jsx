@@ -4,17 +4,16 @@ import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 import Link from "next/link";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
-import { FaFacebook, FaTwitterSquare } from "react-icons/fa";
+import { FaInstagram, FaYoutube, FaTwitterSquare } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
-import { SiLeetcode } from "react-icons/si";
 import { FaWhatsapp } from "react-icons/fa6";
 
 function HeroSection() {
   const whatsappUrl = `https://wa.me/${personalData.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(personalData.whatsappMessage || 'Halo, saya tertarik dengan layanan development Anda.')}`;
 
   return (
-    <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
+    <section className="container-page relative flex flex-col items-center justify-between py-4 lg:py-12">
       <Image
         src="/hero.svg"
         alt="Hero"
@@ -55,7 +54,7 @@ function HeroSection() {
               target='_blank'
               className="transition-all text-pink-500 hover:scale-125 duration-300"
             >
-              <FaFacebook size={30} />
+              <FaInstagram size={30} />
             </Link>
             <Link
               href={personalData.twitter}
@@ -69,7 +68,7 @@ function HeroSection() {
               target='_blank'
               className="transition-all text-red-500 hover:scale-125 duration-300"
             >
-              <SiLeetcode size={30} />
+              <FaYoutube size={30} />
             </Link>
           </div>
 
@@ -81,11 +80,13 @@ function HeroSection() {
               </button>
             </Link>
 
-            <Link className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-3 md:px-8 py-3 md:py-4 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold" role="button" target="_blank" href={personalData.resume}
-            >
-              <span>Get Resume</span>
-              <MdDownload size={16} />
-            </Link>
+            {personalData.resume && (
+              <Link className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-3 md:px-8 py-3 md:py-4 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold" role="button" target="_blank" href={personalData.resume}
+              >
+                <span>Get Resume</span>
+                <MdDownload size={16} />
+              </Link>
+            )}
 
             {/* WhatsApp Button - Prominent */}
             <a

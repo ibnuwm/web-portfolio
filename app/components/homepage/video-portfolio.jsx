@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { FaPlayCircle, FaYoutube, FaFilm } from "react-icons/fa";
 import Image from "next/image";
+import { personalData } from "@/utils/data/personal-data";
 
 const videoData = [
   {
@@ -138,7 +139,7 @@ function VideoPortfolio() {
         </div>
 
         {/* Video Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-4">
+        <div className="container-page grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredVideos.map((video) => (
             <VideoCard key={video.id} video={video} onClick={openVideo} />
           ))}
@@ -252,6 +253,5 @@ function VideoCard({ video, onClick }) {
 }
 
 // Import personalData for youtube link
-import { personalData } from "@/utils/data/personal-data";
 
 export default VideoPortfolio;

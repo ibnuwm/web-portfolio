@@ -2,13 +2,18 @@
 // @flow strict
 import { isValidEmail } from "@/utils/check-email";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { TbMailForward } from "react-icons/tb";
 import { toast } from "react-toastify";
+
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 function ContactForm() {
   const [error, setError] = useState({ email: false, required: false });
   const [isLoading, setIsLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const recaptchaRef = useRef(null);
   const [userInput, setUserInput] = useState({
     name: "",
     email: "",
@@ -31,26 +36,33 @@ function ContactForm() {
       return;
     } else {
       setError({ ...error, required: false });
-    };
+    }
+
+    if (RECAPTCHA_SITE_KEY && !captchaToken) {
+      toast.error("Harap selesaikan verifikasi keamanan (reCAPTCHA) terlebih dahulu.");
+      return;
+    }
 
     try {
       setIsLoading(true);
       const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_APP_URL}/api/contact`,
-        userInput
+        `${process.env.NEXT_PUBLIC_APP_URL || ""}/api/contact`,
+        { ...userInput, recaptchaToken: captchaToken }
       );
 
-      toast.success("Message sent successfully!");
+      toast.success(res.data.message || "Message sent successfully!");
       setUserInput({
         name: "",
         email: "",
         message: "",
       });
+      setCaptchaToken(null);
+      recaptchaRef.current?.reset();
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message || "Gagal mengirim pesan. Silakan coba lagi.");
     } finally {
       setIsLoading(false);
-    };
+    }
   };
 
   return (
@@ -93,7 +105,7 @@ function ContactForm() {
             <label className="text-base">Your Message: </label>
             <textarea
               className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
-              maxLength="500"
+              maxLength="2000"
               name="message"
               required={true}
               onChange={(e) => setUserInput({ ...userInput, message: e.target.value })}
@@ -102,9 +114,21 @@ function ContactForm() {
               value={userInput.message}
             />
           </div>
+
+          {RECAPTCHA_SITE_KEY && (
+            <div className="flex justify-center">
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={RECAPTCHA_SITE_KEY}
+                onChange={(token) => setCaptchaToken(token)}
+                hl="id"
+              />
+            </div>
+          )}
+
           <div className="flex flex-col items-center gap-3">
             {error.required && <p className="text-sm text-red-400">
-              All fiels are required!
+              All fields are required!
             </p>}
             <button
               className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-5 md:px-12 py-2.5 md:py-3 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold"
@@ -126,6 +150,6 @@ function ContactForm() {
       </div>
     </div>
   );
-};
+}
 
 export default ContactForm;

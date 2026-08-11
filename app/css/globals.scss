@@ -1,5 +1,18 @@
 @use "tailwindcss";
 
+@utility container-page {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (min-width: 640px) {
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    padding-inline: 2rem;
+  }
+}
+
 :root {
   --foreground-rgb: 211, 216, 232;
 }
@@ -14,6 +27,7 @@ body {
   color: rgb(var(--foreground-rgb));
   background-color: #0d1224;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: clip;
 }
 
 #sticky-card-1 {

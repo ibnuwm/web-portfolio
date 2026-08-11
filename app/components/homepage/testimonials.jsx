@@ -4,14 +4,26 @@
 import { testimonialsData } from "@/utils/data/testimonials";
 import { FaStar, FaPlayCircle, FaQuoteLeft } from "react-icons/fa";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [videoModal, setVideoModal] = useState(null);
+  const [itemsPerView, setItemsPerView] = useState(3);
 
-  const itemsPerView = typeof window !== 'undefined' ? (window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1) : 3;
+  useEffect(() => {
+    const compute = () =>
+      setItemsPerView(window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1);
+    compute();
+    window.addEventListener("resize", compute);
+    return () => window.removeEventListener("resize", compute);
+  }, []);
+
   const maxIndex = Math.max(0, testimonialsData.length - itemsPerView);
+
+  useEffect(() => {
+    setCurrentIndex((prev) => Math.min(prev, maxIndex));
+  }, [maxIndex]);
 
   const next = () => setCurrentIndex(prev => prev >= maxIndex ? 0 : prev + 1);
   const prev = () => setCurrentIndex(prev => prev <= 0 ? maxIndex : prev - 1);
@@ -44,7 +56,7 @@ function TestimonialsSection() {
         </p>
 
         {/* Carousel Container */}
-        <div className="relative max-w-7xl mx-auto px-4">
+        <div className="relative container-page">
           <div className="overflow-hidden">
             <div
               className="flex transition-transform duration-500 ease-out"

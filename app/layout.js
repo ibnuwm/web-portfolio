@@ -10,10 +10,15 @@ import "./css/globals.scss";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://ibnuwm.com";
+const gtmId = process.env.NEXT_PUBLIC_GTM;
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Ibnu WM - Software Developer & AI Automation Specialist | Indonesia",
-    template: "%s | Ibnu WM Portfolio"
+    template: "%s | Ibnu WM Portfolio",
   },
   description: "Software Developer & AI Automation Specialist fokus pada solusi digital untuk UMKM & startup Indonesia. Layanan: AI Chatbot, Web Development, n8n Automation, Crypto Tools, TikTok Shop Affiliate. Konsultasi gratis.",
   keywords: [
@@ -26,11 +31,14 @@ export const metadata = {
     "tiktok shop affiliate",
     "crypto tools",
     "UMKM digitalisasi",
-    "freelance developer indonesia"
+    "freelance developer indonesia",
   ],
-  authors: [{ name: "Ibnu WM", url: "https://ibnuwm.com" }],
+  authors: [{ name: "Ibnu WM", url: siteUrl }],
   creator: "Ibnu WM",
   publisher: "Ibnu WM",
+  alternates: {
+    canonical: "/",
+  },
   robots: {
     index: true,
     follow: true,
@@ -45,7 +53,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://ibnuwm.com",
+    url: siteUrl,
     siteName: "Ibnu WM Portfolio",
     title: "Ibnu WM - Software Developer & AI Automation Specialist",
     description: "Solusi digital untuk UMKM & startup Indonesia: AI Chatbot, Web Development, n8n Automation, Crypto Tools. Konsultasi gratis.",
@@ -65,19 +73,90 @@ export const metadata = {
     images: ["/og-image.png"],
     creator: "@ibnuwm",
   },
-  verification: {
-    google: "GOOGLE_SITE_VERIFICATION_CODE",
-  },
+  verification: googleVerification
+    ? { google: googleVerification }
+    : undefined,
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "Ibnu WM Portfolio",
+      inLanguage: "id-ID",
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      name: "Ibnu WM",
+      url: siteUrl,
+      jobTitle: "Software Developer & AI Automation Specialist",
+      description:
+        "Software Developer & AI Automation Specialist untuk UMKM dan startup Indonesia.",
+      sameAs: [
+        "https://github.com/ibnuwm",
+        "https://linkedin.com/in/ibnuwm",
+        "https://instagram.com/ibnuwm",
+        "https://youtube.com/@ibnuwm",
+      ],
+    },
+    {
+      "@type": "Service",
+      "@id": `${siteUrl}/#service`,
+      serviceType: "AI Automation & Software Development",
+      provider: { "@id": `${siteUrl}/#person` },
+      areaServed: "ID",
+      availableLanguage: ["id", "en"],
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "IDR",
+        description: "Paket AI Chatbot, Web Development, dan n8n Automation untuk UMKM.",
+      },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${siteUrl}/#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Berapa biaya pembuatan chatbot WhatsApp AI?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Biaya bervariasi tergantung kompleksitas dan integrasi. Lihat halaman paket harga untuk estimasi, atau konsultasi gratis untuk kebutuhan spesifik bisnis Anda.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Apakah tersedia konsultasi gratis?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Ya, konsultasi awal gratis untuk membantu menentukan solusi digital yang tepat bagi bisnis Anda.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Teknologi apa saja yang dikuasai?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "React, Next.js, TypeScript, Python, FastAPI, PostgreSQL, MongoDB, Docker, Kubernetes, n8n, dan integrasi WhatsApp Business API.",
+          },
+        },
+      ],
+    },
+  ],
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="id" suppressHydrationWarning className={inter.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://wa.me" />
-        <link rel="dns-prefetch" href="https://api.telegram.org" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className={`${inter.className} antialiased`} suppressHydrationWarning>
         <ToastContainer
@@ -100,7 +179,7 @@ export default function RootLayout({ children }) {
           <ScrollToTop />
         </main>
         <Footer />
-        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
+        {gtmId && <GoogleTagManager gtmId={gtmId} />}
       </body>
     </html>
   );

@@ -25,7 +25,9 @@ async function getData() {
     }
 
     const data = await res.json();
-    return data.filter((item) => item?.cover_image).sort(() => Math.random() - 0.5);
+    return data
+      .filter((item) => item?.cover_image)
+      .sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
   } catch (error) {
     console.warn('Failed to fetch blogs from dev.to, using empty list:', error.message);
     return [];

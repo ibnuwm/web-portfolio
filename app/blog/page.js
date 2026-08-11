@@ -5,6 +5,22 @@ import BlogCard from "../components/homepage/blog/blog-card";
 import { FaArrowLeft, FaTag, FaCalendar, FaClock, FaEye } from "react-icons/fa";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Blog & Insight",
+  description:
+    "Artikel teknis, case study, dan tutorial tentang AI Automation, Web Development, Crypto Tools, dan solusi digital untuk bisnis Indonesia.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    type: "website",
+    url: "/blog",
+    title: "Blog & Insight | Ibnu WM Portfolio",
+    description:
+      "Artikel teknis, case study, dan tutorial AI Automation, Web Development, dan solusi digital untuk bisnis Indonesia.",
+  },
+};
+
 async function getBlogs() {
   try {
     const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}`, {

@@ -2,6 +2,15 @@
 
 import Link from "next/link";
 
+export const metadata = {
+  title: "404 - Halaman Tidak Ditemukan",
+  description: "Halaman yang Anda cari tidak ditemukan.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 function page() {
   return (
     <div className="flex flex-col items-center justify-center h-screen text-center">

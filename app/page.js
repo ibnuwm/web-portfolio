@@ -7,19 +7,29 @@ import Experience from "./components/homepage/experience";
 import HeroSection from "./components/homepage/hero-section";
 import Projects from "./components/homepage/projects";
 import Skills from "./components/homepage/skills";
+import TeamSection from "./components/homepage/team";
+import TestimonialsSection from "./components/homepage/testimonials";
+import PricingSection from "./components/homepage/pricing";
+import VideoPortfolio from "./components/homepage/video-portfolio";
+import WhatsAppFloat from "./components/homepage/whats-app-float";
 
 async function getData() {
-  const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}`)
+  try {
+    const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}`, {
+      next: { revalidate: 3600 }
+    });
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    if (!res.ok) {
+      console.warn(`dev.to API returned ${res.status}, using empty blog list`);
+      return [];
+    }
+
+    const data = await res.json();
+    return data.filter((item) => item?.cover_image).sort(() => Math.random() - 0.5);
+  } catch (error) {
+    console.warn('Failed to fetch blogs from dev.to, using empty list:', error.message);
+    return [];
   }
-
-  const data = await res.json();
-
-  const filtered = data.filter((item) => item?.cover_image).sort(() => Math.random() - 0.5);
-
-  return filtered;
 };
 
 export default async function Home() {
@@ -32,9 +42,14 @@ export default async function Home() {
       <Experience />
       <Skills />
       <Projects />
+      <TeamSection />
+      <TestimonialsSection />
+      <PricingSection />
+      <VideoPortfolio />
       <Education />
       <Blog blogs={blogs} />
       <ContactSection />
+      <WhatsAppFloat />
     </div>
   )
 };

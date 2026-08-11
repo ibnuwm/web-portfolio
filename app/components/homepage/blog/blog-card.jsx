@@ -3,60 +3,89 @@ import { timeConverter } from '@/utils/time-converter';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BsHeartFill } from 'react-icons/bs';
-import { FaCommentAlt } from 'react-icons/fa';
+import { FaCommentAlt, FaEye, FaClock, FaCalendar, FaArrowRight } from 'react-icons/fa';
 
-function BlogCard({ blog, priority = false }) {
+function BlogCard({ blog, priority = false, formatDate, formatReadTime }) {
+  const pubDate = formatDate ? formatDate(blog.published_at) : timeConverter(blog.published_at);
+  const readTime = formatReadTime ? formatReadTime(blog.reading_time_minutes) : `${blog.reading_time_minutes} min baca`;
 
   return (
-    <div className="border border-[#1d293a] hover:border-[#464c6a] transition-all duration-500 bg-[#1b203e] rounded-lg relative group"
-    >
-      <div className="h-44 lg:h-52 w-auto cursor-pointer overflow-hidden rounded-t-lg">
-        <Image
-          src={blog?.cover_image}
-          height={1080}
-          width={1920}
-          className='h-full w-full group-hover:scale-110 transition-all duration-300'
-          alt=""
-          priority={priority}
-          style={{ width: '100%', height: '100%' }}
-        />
-      </div>
-      <div className="p-2 sm:p-3 flex flex-col">
-        <div className="flex justify-between items-center text-[#16f2b3] text-sm">
-          <p>{timeConverter(blog.published_at)}</p>
-          <div className="flex items-center gap-3">
-            <p className="flex items-center gap-1">
-              <BsHeartFill />
-              <span>{blog.public_reactions_count}</span>
-            </p>
-            {blog.comments_count > 0 &&
-              <p className="flex items-center gap-1">
-                <FaCommentAlt />
-                <span>{blog.comments_count}</span>
-              </p>
-            }
+    <article className="group bg-gradient-to-br from-[#0d1224] to-[#1a1443] border border-[#25213b] rounded-2xl overflow-hidden hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-500">
+      <Link target='_blank' href={blog.url} className="block" aria-label={blog.title}>
+        <div className="relative aspect-video overflow-hidden">
+          <Image
+            src={blog?.cover_image}
+            alt={blog.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
+            priority={priority}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          {/* Category tag */}
+          {blog.tags && blog.tags.length > 0 && (
+            <div className="absolute top-3 left-3 flex flex-wrap gap-1">
+              {blog.tags.slice(0, 2).map((tag, idx) => (
+                <span key={idx} className="px-2 py-1 bg-violet-500/90 text-white text-xs rounded-full backdrop-blur-sm">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+          
+          {/* Read time */}
+          <div className="absolute bottom-3 right-3 bg-black/80 text-white text-xs px-2 py-1 rounded flex items-center gap-1">
+            <FaClock size={10} />
+            {readTime}
           </div>
         </div>
-        <Link target='_blank' href={blog.url}>
-          <p className='my-2 lg:my-3 cursor-pointer text-lg text-white sm:text-xl font-medium hover:text-violet-500'>
+      </Link>
+
+      <div className="p-5 lg:p-6 flex flex-col">
+        <div className="flex items-center justify-between text-gray-400 text-sm mb-3">
+          <time dateTime={blog.published_at} className="flex items-center gap-1">
+            <FaCalendar size={14} />
+            {pubDate}
+          </time>
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1 text-gray-400 hover:text-green-400 transition-colors">
+              <BsHeartFill size={14} />
+              <span>{blog.public_reactions_count || 0}</span>
+            </span>
+            {blog.comments_count > 0 && (
+              <span className="flex items-center gap-1 text-gray-400 hover:text-blue-400 transition-colors">
+                <FaCommentAlt size={14} />
+                <span>{blog.comments_count}</span>
+              </span>
+            )}
+            <span className="flex items-center gap-1 text-gray-400">
+              <FaEye size={14} />
+              <span>{blog.page_views_count ? blog.page_views_count.toLocaleString('id-ID') : '0'}</span>
+            </span>
+          </div>
+        </div>
+
+        <Link target='_blank' href={blog.url} className="block">
+          <h3 className="text-white text-base lg:text-xl font-semibold mb-3 line-clamp-2 group-hover:text-violet-400 transition-colors">
             {blog.title}
-          </p>
+          </h3>
         </Link>
-        <p className='mb-2 text-sm text-[#16f2b3]'>
-          {`${blog.reading_time_minutes} Min Read`}
-        </p>
-        <p className='text-sm lg:text-base text-[#d3d8e8] pb-3 lg:pb-6 line-clamp-3'>
+
+        <p className="text-gray-400 text-sm lg:text-base line-clamp-3 mb-4 flex-1">
           {blog.description}
         </p>
-        {/* <div className="">
-          <Link target='_blank' href={blog.url}>
-            <button className='bg-violet-500 text-white px-3 py-1.5 rounded-full text-xs'>
-              Read More
-            </button>
-          </Link>
-        </div> */}
+
+        <Link
+          target='_blank'
+          href={blog.url}
+          className="inline-flex items-center gap-1.5 text-violet-400 hover:text-violet-300 font-medium text-sm transition-colors self-start"
+        >
+          Baca Selengkapnya
+          <FaArrowRight size={14} />
+        </Link>
       </div>
-    </div>
+    </article>
   );
 };
 

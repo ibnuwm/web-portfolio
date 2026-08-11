@@ -1,52 +1,68 @@
 export const projectsData = [
-    {
-        id: 1,
-        name: 'AI Powered Financial App',
-        description: "Me and my team built an AI-powered financial mobile application. I have developed API using Express, Typescript, OpenAI, AWS, and MongoDB. Used OTP via AWS SES, Google, and Facebook for the authentication system. Built AI assistants using OpenAI's latest model and trained using our dataset. Voice messages are converted to text using AWS Transcribe. The app fetches data from Google Sheets and generates a PDF term sheet, sent via AWS SES.",
-        tools: ['Express', 'MongoDB', 'OpenAI API', 'AWS SES', 'AWS S3', 'Node Mailer', 'Joi', 'Puppeteer', 'EC2', 'PM2', 'Nginx'],
-        role: 'Backend Developer',
-        code: '',
-        demo: '',
-    },
-    {
-        id: 2,
-        name: 'Travel Agency App',
-        description: 'I have designed and developed a full-stack web app for 2Expedition, a travel agency in Armenia. I created the UI using NextJS, Typescript, MUI, TailwindCSS, Google Maps, Sun-Editor, and React Slick. The app supports multiple languages and currencies. I developed the API using NestJS, Typescript, MySQL, TypeORM, AWS, and Nodemailer. I deployed the front-end app to AWS Amplify and the back-end app to AWS EC2.',
-        tools: ['NextJS', 'Tailwind CSS', "Google Maps", "NestJS", "TypeScript", "MySQL", "AWS S3", "Sun-Editor", "Gmail Passkey"],
-        role: 'Full Stack Developer',
-        code: '',
-        demo: '',
-    },
-    {
-        id: 3,
-        name: 'AI Powered Real Estate',
-        description: 'My team built an AI-based real estate app using Replicate API and OpenAI. We used Express, Typescript, OpenAI, Replicate, Stripe, and Mongoose to develop the API. We utilized NextJS, Formik, TailwindCSS, and other npm libraries for the UI. We have trained multiple AI assistants using the latest GPT model and integrated Replicate API for image processing. We added role-based auth, subscription plans, Cron job scheduling, and payment integration with Stripe.',
-        tools: ['React', 'Bootstrap', 'SCSS', 'Stripe', 'Express', 'TypeScript', 'MongoDB', 'Azure Blob', 'OpenAI API', 'Replicate AI', 'Cronjob', 'JWT'],
-        code: '',
-        role: 'Full Stack Developer',
-        demo: '',
-    },
-    {
-        id: 4,
-        name: 'Newsroom Management',
-        description: "My team and I developed a newspaper management dashboard application called Newsroom Management. As a front-end developer, I worked on creating the dashboard using NextJS, Material UI, Redux, Calendar, and other necessary npm libraries. We used React Redux to manage the application's state and React-hook-form and Sun Editor to handle forms.",
-        tools: ['NextJS', 'Material UI', 'Redux', 'Sun Editor', "Calendar"],
-        code: '',
-        demo: '',
-        role: 'Full Stack Developer',
-    }
-];
-
-
-// Do not remove any property.
-// Leave it blank instead as shown below
-
-// {
-//     id: 1,
-//     name: '',
-//     description: "",
-//     tools: [],
-//     role: '',
-//     code: '',
-//     demo: '',
-// },
+  {
+    id: 1,
+    name: "AI Chatbot UMKM",
+    description: "Chatbot AI lokal untuk UMKM Indonesia menggunakan Qwen/Llama.cpp, deployment VPS siap pakai dengan proxy chat ke model lokal. Fitur: multi-tenant, billing otomatis, dashboard admin.",
+    techStack: ["Next.js", "Python", "Llama.cpp", "Docker", "PostgreSQL", "WhatsApp API"],
+    github: "https://github.com/ibnuwm/ai-chatbot-umkm",
+    liveDemo: "https://vps-ai.ibnuwm.com",
+    image: "/projects/ai-chatbot.png",
+    featured: true,
+    category: "AI Automation"
+  },
+  {
+    id: 2,
+    name: "TikTok Shop Affiliate Automation",
+    description: "Sistem semi-otomatis produksi video affiliate TikTok Shop: riset trending harian → script AI → TTS edge-tts → edit FFmpeg → upload scheduler. Target komisi Rp100jt/bulan.",
+    techStack: ["n8n", "Python", "FFmpeg", "Edge TTS", "Whisper", "TikTok API", "Google Sheets"],
+    github: "https://github.com/ibnuwm/tiktok-affiliate-auto",
+    liveDemo: null,
+    image: "/projects/tiktok-auto.png",
+    featured: true,
+    category: "Content Automation"
+  },
+  {
+    id: 3,
+    name: "Crypto Content Generator",
+    description: "Poster generator otomatis untuk Instagram/X/Telegram: alert harga, digest pasar, edukasi kripto. Monetisasi via afiliasi exchange. Cron harian 07:00 WIB, Pillow + CoinGecko API.",
+    techStack: ["Python", "Pillow", "CoinGecko API", "Cron", "Instagram API", "Telegram Bot"],
+    github: "https://github.com/ibnuwm/crypto-poster-gen",
+    liveDemo: "https://t.me/kriptocermat",
+    image: "/projects/crypto-poster.png",
+    featured: true,
+    category: "Crypto Tools"
+  },
+  {
+    id: 4,
+    name: "DCA Simulator & Portfolio Tracker",
+    description: "Simulator Dollar Cost Averaging untuk aset kripto & saham Indonesia. Backtest historis, proyeksi return, rebalancing otomatis, export laporan PDF untuk klien.",
+    techStack: ["React", "TypeScript", "Chart.js", "Yahoo Finance API", "pdfmake", "Vercel"],
+    github: "https://github.com/ibnuwm/dca-simulator",
+    liveDemo: "https://dca.ibnuwm.com",
+    image: "/projects/dca-simulator.png",
+    featured: false,
+    category: "FinTech"
+  },
+  {
+    id: 5,
+    name: "Laravel SaaS Boilerplate",
+    description: "Starter kit Laravel + Livewire untuk SaaS multi-tenant: billing (Midtrans/Xendit), auth, tim management, API tokens, admin panel, deployment Docker siap VPS Indonesia.",
+    techStack: ["Laravel", "Livewire", "MySQL", "Redis", "Docker", "Midtrans", "Xendit"],
+    github: "https://github.com/ibnuwm/laravel-saas-boilerplate",
+    liveDemo: "https://saas.ibnuwm.com",
+    image: "/projects/laravel-saas.png",
+    featured: false,
+    category: "Web Development"
+  },
+  {
+    id: 6,
+    name: "n8n Workflow Templates Indonesia",
+    description: "Koleksi workflow n8n siap pakai untuk bisnis Indonesia: WA Broadcast, Google Sheets Sync, Midtrans Invoice, TikTok Shop Order Sync, Crypto Price Alert. Import 1-klik.",
+    techStack: ["n8n", "JavaScript", "WhatsApp API", "Google Sheets API", "Midtrans API"],
+    github: "https://github.com/ibnuwm/n8n-indonesia-workflows",
+    liveDemo: null,
+    image: "/projects/n8n-workflows.png",
+    featured: false,
+    category: "Automation"
+  }
+]

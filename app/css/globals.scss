@@ -1,7 +1,7 @@
 @use "tailwindcss";
 
 :root {
-  --foreground-rgb: rgb(211, 216, 232);
+  --foreground-rgb: 211, 216, 232;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,6 +13,7 @@
 body {
   color: rgb(var(--foreground-rgb));
   background-color: #0d1224;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
 #sticky-card-1 {
@@ -32,6 +33,92 @@ body {
 }
 
 .sticky-card {
-  // padding-top: calc(var(--index) * 2.5rem);
   top: calc(var(--index) * 4rem);
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d1224;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d946ef, #f43f5e);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #c026d3, #e11d48);
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid #d946ef;
+  outline-offset: 2px;
+}
+
+/* Text selection */
+::selection {
+  background-color: rgba(217, 70, 239, 0.3);
+  color: white;
+}
+
+/* Mobile-first utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+}
+
+/* Performance optimizations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --contrast-adjust: 1;
+  }
 }

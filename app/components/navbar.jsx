@@ -61,6 +61,8 @@ function Navbar() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-track="wa_click"
+              data-track-label="navbar-desktop"
               className="hidden lg:inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:from-green-600 hover:to-emerald-600 transition-all duration-300 shadow-lg shadow-green-500/30 hover:scale-105"
             >
               <FaWhatsapp size={18} />
@@ -74,6 +76,8 @@ function Navbar() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-track="wa_click"
+              data-track-label="navbar-mobile"
               className="p-2 bg-green-500/20 text-green-400 rounded-full hover:bg-green-500/40 transition-colors"
               aria-label="WhatsApp"
             >
@@ -109,6 +113,8 @@ function Navbar() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-track="wa_click"
+              data-track-label="navbar-menu"
               className="block flex items-center justify-center gap-3 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg font-semibold hover:from-green-600 hover:to-emerald-600 transition-all"
               onClick={() => setIsOpen(false)}
             >

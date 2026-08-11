@@ -30,6 +30,8 @@ function ContactSection() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-track="wa_click"
+              data-track-label="contact-card"
               className="group flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 rounded-xl hover:border-green-500/50 hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300"
             >
               <div className="bg-green-500/20 p-3 rounded-full group-hover:bg-green-500/40 group-hover:scale-110 transition-all duration-300">
@@ -130,6 +132,8 @@ function ContactSection() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-track="wa_click"
+              data-track-label="contact-social"
               aria-label="WhatsApp"
             >
               <FaWhatsapp

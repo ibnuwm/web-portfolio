@@ -138,6 +138,36 @@ async function sendEmail({ name, email, message }) {
   }
 }
 
+async function sendAutoReply(name, email) {
+  if (!transporter) return;
+  const mailOptions = {
+    from: EMAIL_ADDRESS,
+    to: email,
+    subject: "Terima kasih sudah menghubungi Ibnu WM",
+    text:
+      `Halo ${name},\n\n` +
+      "Terima kasih atas pesan yang Anda kirimkan. Pesan Anda sudah kami terima dan akan dibalas " +
+      "secepatnya oleh Ibnu WM.\n\n" +
+      "Jika ada yang mendesak, silakan hubungi langsung melalui WhatsApp.\n\n" +
+      "Salam,\nIbnu WM",
+    html: `
+      <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; background-color: #f4f4f4;">
+        <div style="max-width: 600px; margin: auto; background-color: #fff; padding: 20px; border-radius: 8px;">
+          <h2 style="color: #6366F1;">Terima kasih sudah menghubungi, ${escapeHtml(name)}</h2>
+          <p>Pesan Anda sudah kami terima dan akan dibalas secepatnya oleh Ibnu WM.</p>
+          <p>Jika ada yang mendesak, silakan hubungi langsung melalui WhatsApp.</p>
+          <p style="font-size: 12px; color: #888;">Salam,<br/>Ibnu WM</p>
+        </div>
+      </div>`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.error("Error sending auto-reply email:", error.message);
+  }
+}
+
 export async function POST(request) {
   try {
     const ip = getClientIp(request);
@@ -184,6 +214,8 @@ export async function POST(request) {
         : Promise.resolve(false),
       sendEmail({ name, email, message }),
     ]);
+
+    await sendAutoReply(name, email);
 
     const delivered = results.some(Boolean);
     return NextResponse.json(

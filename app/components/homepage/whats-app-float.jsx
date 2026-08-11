@@ -46,6 +46,8 @@ export default function WhatsAppFloat() {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
+          data-track="wa_click"
+          data-track-label="floating"
           className={`flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/40 transition-all duration-300 hover:scale-110 animate-bounce-subtle ${isOpen ? 'rotate-45' : ''}`}
           aria-label="Chat WhatsApp"
         >
@@ -59,6 +61,8 @@ export default function WhatsAppFloat() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-track="wa_click"
+              data-track-label="floating-menu"
               className="flex items-center gap-3 bg-white text-green-700 px-4 py-3 rounded-lg shadow-lg shadow-green-500/20 hover:shadow-green-500/40 transition-all duration-300 hover:scale-105 whitespace-nowrap"
             >
               <FaWhatsapp size={20} />
@@ -66,6 +70,8 @@ export default function WhatsAppFloat() {
             </a>
             <a
               href={`tel:${personalData.phone}`}
+              data-track="phone_click"
+              data-track-label="floating-menu"
               className="flex items-center gap-3 bg-white text-blue-700 px-4 py-3 rounded-lg shadow-lg hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 whitespace-nowrap"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>

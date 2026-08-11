@@ -2,6 +2,8 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AnalyticsTracker from "./components/analytics-tracker";
+import PWARegister from "./components/pwa-register";
 import Footer from "./components/footer";
 import ScrollToTop from "./components/helper/scroll-to-top";
 import Navbar from "./components/navbar";
@@ -38,6 +40,15 @@ export const metadata = {
   publisher: "Ibnu WM",
   alternates: {
     canonical: "/",
+    languages: {
+      "id-ID": siteUrl,
+      "x-default": siteUrl,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/icon-192.png",
   },
   robots: {
     index: true,
@@ -178,6 +189,8 @@ export default function RootLayout({ children }) {
           {children}
           <ScrollToTop />
         </main>
+        <AnalyticsTracker />
+        <PWARegister />
         <Footer />
         {gtmId && <GoogleTagManager gtmId={gtmId} />}
       </body>

@@ -81,20 +81,22 @@ function HeroSection() {
             </Link>
 
             {personalData.resume && (
-              <Link className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-3 md:px-8 py-3 md:py-4 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold" role="button" target="_blank" href={personalData.resume}
-              >
-                <span>Get Resume</span>
-                <MdDownload size={16} />
-              </Link>
-            )}
+              <Link className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-3 md:px-8 py-3 md:py-4 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold" role="button" target="_blank" href={personalData.resume} data-track="resume_download"
+                >
+                  <span>Get Resume</span>
+                  <MdDownload size={16} />
+                </Link>
+              )}
 
-            {/* WhatsApp Button - Prominent */}
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-sm md:text-base uppercase tracking-wider transition-all duration-300 hover:scale-105 shadow-lg shadow-green-500/30 hover:shadow-green-500/50 animate-pulse"
-            >
+              {/* WhatsApp Button - Prominent */}
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="wa_click"
+                data-track-label="hero"
+                className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-sm md:text-base uppercase tracking-wider transition-all duration-300 hover:scale-105 shadow-lg shadow-green-500/30 hover:shadow-green-500/50 animate-pulse"
+              >
               <FaWhatsapp size={20} />
               <span className="hidden sm:inline">Chat WhatsApp</span>
               <span className="sm:hidden">WA</span>

@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { FaGithub, FaLinkedin, FaTwitter, FaInstagram, FaYoutube, FaWhatsapp, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import { personalData } from "@/utils/data/personal-data";
+import NewsletterForm from "./homepage/newsletter-form";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -20,13 +21,14 @@ function Footer() {
       { label: "Tentang Kami", href: "/#about" },
       { label: "Tim Kami", href: "/#team" },
       { label: "Portfolio Project", href: "/#projects" },
+      { label: "Case Studies", href: "/case-studies" },
       { label: "Testimoni Klien", href: "/#testimonials" },
       { label: "Blog & Insight", href: "/blog" },
       { label: "Video Portfolio", href: "/#video-portfolio" },
     ],
     dukungan: [
       { label: "Konsultasi Gratis", href: "/#contact" },
-      { label: "FAQ", href: "/#contact" },
+      { label: "FAQ", href: "/#faq" },
       { label: "Syarat & Ketentuan", href: "/#contact" },
       { label: "Kebijakan Privasi", href: "/#contact" },
       { label: "SLA & Support", href: "/#pricing" },
@@ -69,6 +71,8 @@ function Footer() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-track="wa_click"
+                data-track-label="footer"
                 className="flex items-center gap-3 text-gray-400 hover:text-green-400 transition-colors group"
               >
                 <FaWhatsapp className="text-green-400 w-5 h-5 group-hover:scale-110 transition-transform" size={20} />
@@ -145,6 +149,9 @@ function Footer() {
             <p className="text-gray-400 text-sm mb-6">
               Ikuti update terbaru project, tutorial, dan insight teknis kami.
             </p>
+
+            {/* Newsletter */}
+            <NewsletterForm />
             
             {/* Social Links */}
             <div className="flex flex-wrap gap-3 mb-6">
@@ -167,6 +174,8 @@ function Footer() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-track="wa_click"
+              data-track-label="footer-cta"
               className="inline-flex items-center gap-2 w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-3 rounded-xl font-semibold text-sm text-center hover:from-green-600 hover:to-emerald-600 transition-all duration-300 shadow-lg shadow-green-500/30"
             >
               <FaWhatsapp size={20} />

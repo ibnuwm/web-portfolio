@@ -1,6 +1,7 @@
 "use client";
 // @flow strict
 import { isValidEmail } from "@/utils/check-email";
+import { trackEvent } from "@/utils/analytics";
 import axios from "axios";
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -51,6 +52,7 @@ function ContactForm() {
       );
 
       toast.success(res.data.message || "Message sent successfully!");
+      trackEvent("contact_form_submit", { label: "success" });
       setUserInput({
         name: "",
         email: "",

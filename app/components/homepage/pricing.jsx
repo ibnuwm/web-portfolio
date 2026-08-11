@@ -148,6 +148,8 @@ function PricingSection() {
                 {/* CTA Button */}
                 <a
                   href="#contact"
+                  data-track="pricing_cta"
+                  data-track-label={pkg.name}
                   className={`block w-full text-center py-3 md:py-4 rounded-full font-semibold text-sm md:text-base uppercase tracking-wider transition-all duration-300 ${
                     pkg.popular
                       ? 'bg-gradient-to-r from-violet-500 to-pink-500 text-white hover:from-violet-600 hover:to-pink-600 shadow-lg shadow-violet-500/30'
@@ -190,6 +192,8 @@ function PricingSection() {
           </p>
           <a
             href="#contact"
+            data-track="pricing_cta"
+            data-track-label="consultation"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-500 to-pink-500 text-white px-8 py-4 rounded-full font-semibold text-base uppercase tracking-wider hover:from-violet-600 hover:to-pink-600 transition-all duration-300 shadow-lg shadow-violet-500/30"
           >
             Konsultasi Gratis
